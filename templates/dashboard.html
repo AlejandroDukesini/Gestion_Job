@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--FONTs-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Mozilla+Headline:wght@100&display=swap" rel="stylesheet">
+    <!--FONT-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <!--TAILWIND-->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!--CSS-->
+    <link rel="stylesheet" href="/static/importante.css?=1.0">
+    <link rel="stylesheet" href="/static/dashboard.css?=1.0">
+    <link rel="stylesheet" href="/static/style.css?=1.0">
+    <!--LOGO-->
+    <link rel="shortcut icon" href="/static/multimedia/icono/lapiz-blanco.png" type="image/x-icon">
+    <!--TITLE-->
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <nav class="mozilla-headline-nav flex justify-center w-auto h-auto">
+            <ul>
+                <li class=""><a href="/nuevo">Crear Trabajo</a></li>
+                <li class="logo">
+                    <div class="pr-6">
+                        <p>Tu Nombre</p>
+                    </div>
+                    <div class="logos">
+                        <img width="32px" src="/static/multimedia/icono/lapiz-blanco.png" alt="SANTIAGO DUQUE EMPRESA DE EDUCACIÓN PROEDU CMR">
+                    </div>
+                </li>
+            </ul>
+        </nav>    
+    </header>
+    <section class="dm-sans-font">
+        {% extends "base.html" %}
+        {% block content %}
+        <div> <!--Fecha-->
+            <p class="fecha-actual">
+                Resumen financiero — {{ fecha_actual }}
+            </p>
+        </div>
+        <div class="min-h-[20vh] mt-10">
+            <!--Encabezados tabla-->
+            <div class="cards">
+                <div class="card">
+                    <p>Trabajos activos</p>
+                    <h3>{{ total }}</h3>
+                </div>
+                <div class="card danger">
+                    <p>Vencen hoy / mañana</p>
+                    <h3>{{ urgentes }}</h3>
+                </div>
+                <div class="card warning">
+                    <p>Sin adelanto</p>
+                    <h3>{{ sin_adelanto }}</h3>
+                </div>
+                <div class="card">
+                    <p>Saldo pendiente</p>
+                    <h3>${{ saldo_total }}</h3>
+                </div>
+                <div class="card">
+                    <p>Ingresos del mes ({{ fecha_actual }})</p>
+                    <h3>${{ ingreso_mensual }}</h3>
+                </div>
+                <div class="card">
+                    <p>Ingresos del año</p>
+                    <h3>${{ ingreso_anual }}</h3>
+                </div>   
+            </div>
+            <!--Opciones Tabla-->
+            <div class="table-wrapper mt-5 flex justify-center"> 
+                <table class="dashboard-table">
+                    <div class="tablaone">
+                        <tr>
+                            <th>⏱</th>
+                            <th>Entrega</th>
+                            <th>Asignatura</th>
+                            <th>Estado</th>
+                            <th>Pago</th>
+                            <th>$</th>
+                        </tr>
+                    </div>
+
+                    {% for t in trabajos %}
+                    <div class="tabletwo">
+                        <tr class="
+                            {% if t.dias <= 1 %}hoy
+                            {% elif t.dias <= 3 %}proximo
+                            {% endif %}
+                        ">
+                            <!--Días-->
+                            <td class="dias">
+                                <span class="flex justify-center items-center">
+                                    {{ t.dias }}
+                                </span>
+                            </td>
+                            <!--Fecha-->
+                            <td>
+                                <span class="flex justify-center">
+                                    {{ t.fecha_entrega_parcial if t.tiene_entrega_parcial else t.fecha_entrega_final }}
+                                </span>
+                            </td>
+                            <!--Asignatura-->
+                            <td>
+                                <strong>{{ t.asignatura }}</strong>
+                                {% if t.observaciones %}
+                                    <div class="obs">{{ t.observaciones }}</div>
+                                {% endif %}
+                            </td>
+                            <td class="flex justify-center mt-2.5">
+                                <span class="estado {{ t.estado_trabajo }}">
+                                    {{ t.estado_trabajo }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="flex justify-center mt-2.5">
+                                    <div class="pago {{ t.estado_pago|lower|replace(' ', '-') }}">
+                                        {{ t.estado_pago }}
+                                    </div>
+                                </span>
+                            </td>
+                            <td class="saldo">
+                                <span class="flex justify-center">
+                                    ${{ t.saldo }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="flex justify-center">
+                                    <a class="btn" href="/entregar/{{ t.id }}">✔</a>
+                                </span>
+                            </td>
+                        </tr>
+                    </div>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </section>
+    <footer class="flex justify-around">
+        <div>
+            <img class="" width="120px" src="/static/multimedia/better/Diseño_sin_título-removebg-preview.png" alt="PROEDU LOGO EMPRESA COLOR BLANCO EDUCATIVO BAJO LICENCIA"></li>
+        </div>
+        <ul class="">
+            <li><a href="">Consultar Programador</a></li>
+            <li>Diseñado por COLdex</li>
+            <li>Copyright 2036 DERECHOS RESERVADOS</li>
+        </ul>
+    </footer>
+        {% endblock %}
+</body>
+</html>

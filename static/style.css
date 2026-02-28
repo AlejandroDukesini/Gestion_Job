@@ -1,0 +1,176 @@
+/*
+---------------------------------HEADER
+*/
+.prdcrm{
+    margin-left:20px;
+    margin-top:20px;
+    font-size:30px;
+}
+.npro{
+    margin-left:20px;
+    color:rgb(0, 88, 0);
+    text-decoration: none;
+    transition-duration: 200ms;
+}
+.npro:hover{
+    color:goldenrod;
+    
+}
+.fecha-actual {
+    margin-left:20px;
+    margin-bottom: 20px;
+    margin-top:20px;
+    color: #515864;
+    font-size: 14px;
+}
+/*
+---------------------------------SECTION
+*/
+
+/* CONTENEDOR : GESTIÓN DE TAREAS*/
+.cards{
+    display:flex;
+    justify-content:space-around;
+}
+.card{
+    padding-left:10px;
+    padding-right:10px;
+    border-right:1px solid black;
+}
+.card h3{
+    display:flex;
+    justify-content:center;
+}
+.table-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+/* TABLA : GESTIÓN DE TAREAS */
+.dashboard-table {
+    margin-top: 13px;
+    width: 96%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+
+/*SE CREAN POR MEDIO DE BACKEND*/
+/* CABECERA */
+.tablaone th {
+    display: flex;
+    justify-content: space-around;
+    width:50vw;
+    font-size: 14px;
+    color: #374151;
+}
+
+/* CELDAS */
+.tabletwo{
+    display: flex;
+    justify-content: space-around;
+}
+
+/* COLUMNAS ESPECIALES */
+.dias {
+    font-weight: bold;
+    font-size: 16px;
+    align-items: center;
+}
+.saldo {
+    font-weight: bold;
+}
+
+/* ESTADOS */
+.estado {
+    padding: 5px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    width: auto;
+}
+.estado.pendiente { background: #fef3c7; }
+.estado.en_progreso { background: #e0f2fe; }
+.estado.esperando_revision { background: #ede9fe; }
+.estado.entregado { background: #dcfce7; }
+
+/* ESTADO: PAGO */
+.pago {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    width:auto;
+}
+
+.pago.sin-pagar { background: #fee2e2; }
+.pago.adelanto { background: #fff7ed; }
+.pago.pagado { background: #dcfce7; }
+
+/* ESTADO: URGENCIA */
+tr.hoy {
+    background: #fff1f2;
+}
+
+tr.proximo {
+    background: #fffbeb;
+}
+
+/* ESTADO: OBSERVACIONES */
+.obs {
+    margin-top: 6px;
+    font-size: 10px;
+    color: #6b7280;
+}
+
+/* BOTÓN */
+.btn {
+    background: rgba(8, 90, 40, 0.92);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition-duration: 250ms;
+}
+.btn:hover{
+    background-color: #10b0b9;
+}
+
+.form-card {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.form-group {
+    padding:15px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/*INPUT*/
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #a2a2a2;
+}
+
+/*
+---------------------------------FOOTER
+*/

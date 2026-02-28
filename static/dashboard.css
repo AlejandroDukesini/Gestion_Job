@@ -1,0 +1,64 @@
+nav ul{
+    position:relative;
+    width: 50vw;
+    height: 50px;
+    margin-top: 7px;
+    background-color: rgba(8, 90, 40, 0.92);
+    border-radius: 50px;
+    display:flex;
+    justify-content:space-around;
+    list-style:none;
+    padding:0;
+}
+nav a{
+    text-decoration:none;
+    padding:5px;
+    color:whitesmoke;
+    font-size:16px;
+    transition-duration: 100ms;
+    border-radius:5px;
+}
+nav a:hover{
+    color:rgb(24, 39, 3);
+    background-color:rgba(255, 255, 255, 0.819);
+    border-radius:17px;
+}
+nav p{
+    color:whitesmoke;
+    transition-duration:100ms;
+}
+nav p:hover{
+    color:yellowgreen;
+    transition-duration:100ms;
+}
+nav li{
+    display: flex;
+    align-items: center;
+}
+/*NEW PROJECT*/
+/*Section*/
+h2{
+    font-size:20px;
+}
+/*FOOTER*/
+footer{
+    background-color: rgba(8, 90, 40, 0.92);
+    color:white;
+    padding-top:5px;
+    padding-bottom:6px;
+    align-items: center;
+}
+footer ul{
+    padding:0;
+}
+footer li{
+    list-style:none;
+    padding:5px;
+}
+footer li a{
+    color:greenyellow;
+    transition-duration:200ms;
+}
+footer li a:hover{
+    color:goldenrod;
+}

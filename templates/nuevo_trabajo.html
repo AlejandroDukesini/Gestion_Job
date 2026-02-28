@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--FONTs-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Mozilla+Headline:wght@100&display=swap" rel="stylesheet">
+    <!--CSS-->
+    <!--TAILWIND-->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!--CSS-->
+    <link rel="stylesheet" href="/static/style.css?=1.0">
+    <link rel="stylesheet" href="/static/dashboard.css?=1.0">
+    <link rel="stylesheet" href="/static/importante.css?=1.0">
+    <!--LOGO-->
+    <link rel="shortcut icon" href="/static/multimedia/icono/lapiz-blanco.png" type="image/x-icon">
+    <!--TITLE-->
+    <title>Nueva Tarea</title>
+</head>
+<body>
+    <header>
+        <nav class="mozilla-headline-nav flex justify-center w-auto h-auto">
+            <ul>
+                <li><a href="/">Volver</a></li>
+                <li>
+                    <div class="pr-6">
+                        <p>Santiago Duque</p>
+                    </div>
+                    <div class="logos">
+                        <img width="32px" src="/static/multimedia/icono/lapiz-blanco.png" alt="SANTIAGO DUQUE EMPRESA DE EDUCACIÓN PROEDU CMR">
+                    </div>
+                </li>
+            </ul>
+        </nav>    
+    </header>
+    <section>
+        <article class="flex justify-center"><!--Título-->
+            <h2 class="mt-10"><b>Crea Un Nuevo trabajo</b></h2>
+        </article>
+        <article><!--Formulario-->
+            <form method="post" class="form-card flex justify-around">
+                <div><!--PRIMERA INFO-->
+                    <!--Información-->
+                    <div>
+                        <div class="form-group">
+                            <label>Asignatura</label>
+                            <input name="asignatura" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <input name="descripcion">
+                        </div>
+                    </div>
+
+                    <!--Tiempo-->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Entrega final</label>
+                            <input class="cursor-pointer" type="date" name="fecha_final" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Entrega parcial
+                            </label>
+                            <div class="flex justify-around">
+                                <input class="mr-5 cursor-pointer" type="checkbox" name="parcial">
+                                <input class="cursor-pointer" type="date" name="fecha_parcial">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div> <!--SEGUNDA INFO-->
+                    <!--Precio-->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Valor total</label>
+                            <input type="number" name="valor" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Adelanto</label>
+                            <input type="number" name="adelanto" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <!--Más detalles-->
+                    <div class="form-group">
+                        <label>Observaciones</label>
+                        <textarea name="observaciones"></textarea>
+                    </div>
+                </div>
+                <!--Finalizar-->
+                <button type="submit" class="btn cursor-pointer">Guardar trabajo</button>
+            </form>
+        </article>
+    </section>
+    <footer class="flex justify-around">
+        <div>
+            <img class="" width="120px" src="/static/multimedia/better/Diseño_sin_título-removebg-preview.png" alt="PROEDU LOGO EMPRESA COLOR BLANCO EDUCATIVO"></li>
+        </div>
+        <ul class="">
+            <li><a href="wa.me/+573017189434">Consultar Diseñador Front</a></li>
+            <li>Santiago Duque Enterprise PROEDU</li>
+            <li>Copyright 2028 DERECHOS RESERVADOS</li>
+        </ul>
+    </footer>
+</body>
+</html>

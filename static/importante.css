@@ -1,0 +1,31 @@
+html{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+body{
+    background-color: whitesmoke;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ocupa todo el alto de la pantalla */
+    margin: 0
+}
+section{
+    flex: 1;
+}
+.dm-sans-font {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.mozilla-headline-nav {
+  font-family: "Mozilla Headline", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style:normal;
+  font-variation-settings:
+    "wdth" 100;
+}
