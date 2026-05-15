@@ -1,22 +1,22 @@
 # Alejandro Rodríguez Duque - Front End
 # Santiago Rodríguez Duque - Back End
 # 28 Febrero 2026
-# Licencia de uso, código abierto pero, sin copia literal del mismo
+# Licencia de uso, leer el LICENSE
 # Quindío, Colombia
 
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 from datetime import datetime, date
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="pages")
 
-# ---------- DB ----------
+# ---------- Data Base ----------
 def get_db():
     conn = sqlite3.connect("database.db")
     conn.row_factory = sqlite3.Row
     return conn
 
-# ---------- UTILIDADES ----------
+# ---------- Estado del pago (sin pagar, adelanto, pagado) ----------
 def estado_pago(valor, adelanto):
     if adelanto == 0:
         return "Sin pagar"
@@ -25,6 +25,8 @@ def estado_pago(valor, adelanto):
     return "Pagado"
 
 print(estado_pago(2,1))
+
+# ---------- Días Restantes ----------
 
 def dias_restantes(fecha):
     return (datetime.strptime(fecha, "%Y-%m-%d").date() - date.today()).days
@@ -44,6 +46,7 @@ def dashboard():
             END
     """).fetchall()
 
+    # Registro de facturación con cantidad de trabajos procesados a nivel mensual y semanal.
     trabajos_procesados = []
     hoy = date.today()
     mes_actual = hoy.strftime("%Y-%m")
@@ -54,7 +57,7 @@ def dashboard():
 
     for t in trabajos_procesados:
 
-        # Adelanto cuenta en el mes de creación
+        # Saldo De Cuenta De Pagos Adelantados
         if t["adelanto"] > 0:
             creado = t["creado_en"]
             if creado.startswith(mes_actual):
@@ -73,14 +76,17 @@ def dashboard():
                 ingreso_anual += saldo_cobrado
 
     for t in trabajos:
+        # Fechas de parciales
         fecha_ref = (
             t["fecha_entrega_parcial"]
             if t["tiene_entrega_parcial"] and t["fecha_entrega_parcial"]
             else t["fecha_entrega_final"]
         )
 
+        # Total a pagar
         saldo = t["valor_total"] - t["adelanto"]
 
+        # Proceso front del estado de cada trabajo
         trabajos_procesados.append({
             **dict(t),
             "estado_pago": estado_pago(t["valor_total"], t["adelanto"]),
@@ -88,13 +94,14 @@ def dashboard():
             "dias": dias_restantes(fecha_ref)
         })
 
-    # 🔥 NUEVO: métricas para las tarjetas
+    # Métricas para las casillas
     total_activos = len(trabajos_procesados)
     urgentes = len([t for t in trabajos_procesados if t["dias"] <= 1])
     sin_adelanto = len([t for t in trabajos_procesados if t["adelanto"] == 0])
     saldo_total = sum(t["saldo"] for t in trabajos_procesados)
     fecha_actual = date.today().strftime("%B %Y")
 
+    # Renderizado
     return render_template(
     "dashboard.html",
     trabajos=trabajos_procesados,
@@ -107,6 +114,7 @@ def dashboard():
     fecha_actual=fecha_actual
     )
 
+# Configuraciones de renderizado
 @app.route("/nuevo", methods=["GET", "POST"])
 def nuevo():
     inicio = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
