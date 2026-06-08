@@ -1,9 +1,13 @@
+/* ========================= GENERAL ========================= */
 html{
     padding: 0;
     margin: 0;
     height: 100%;
 }
 body{
+    /* MODO OSCURO */
+    /* background-color: rgb(6, 3, 32); */
+    /* MODO CLARO */
     background-color: whitesmoke;
     padding: 0;
     margin: 0;
@@ -12,9 +16,79 @@ body{
     min-height: 100vh; /* Ocupa todo el alto de la pantalla */
     margin: 0
 }
+/* ========================= NAV ========================= */
+nav ul{
+    position:relative;
+    width: 50vw;
+    height: 50px;
+    margin-top: 17px;
+    /* MODO OSCURO */
+    background-color: rgba(3, 65, 26, 0.92);
+    /* MODO CLARO */
+    /* background-color: rgba(8, 90, 40, 0.92); */
+    border-radius: 50px;
+    display:flex;
+    justify-content:space-around;
+    list-style:none;
+    padding:0;
+}
+nav a{
+    text-decoration:none;
+    padding:5px;
+    color:whitesmoke;
+    font-size:16px;
+    transition-duration: 100ms;
+    border-radius:5px;
+}
+nav a:hover{
+    color:rgb(24, 39, 3);
+    background-color:rgba(255, 255, 255, 0.819);
+    border-radius:17px;
+}
+nav p{
+    color:whitesmoke;
+    transition-duration:100ms;
+}
+nav p:hover{
+    color:yellowgreen;
+    transition-duration:100ms;
+}
+nav li{
+    display: flex;
+    align-items: center;
+}
+
+/* ========================= SECTION ========================= */
 section{
     flex: 1;
 }
+/* ========================= FOOTER ========================= */
+footer{
+    /* MODO OSCURO */
+    background-color: rgba(3, 65, 26, 0.92);
+    /* MODO CLARO */
+    /* background-color: rgba(8, 90, 40, 0.92); */
+    color:white;
+    padding-top:5px;
+    padding-bottom:6px;
+    align-items: center;
+}
+footer ul{
+    padding:0;
+}
+footer li{
+    list-style:none;
+    padding:5px;
+}
+footer li a{
+    color:greenyellow;
+    transition-duration:200ms;
+}
+footer li a:hover{
+    color:goldenrod;
+}
+
+/* ========================= OTROS ========================= */
 .dm-sans-font {
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;

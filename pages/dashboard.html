@@ -3,156 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--FONTs-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Mozilla+Headline:wght@100&display=swap" rel="stylesheet">
-    <!--FONT-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <!--TAILWIND-->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!--CSS-->
-    <link rel="stylesheet" href="/static/importante.css?=1.0">
-    <link rel="stylesheet" href="/static/dashboard.css?=1.0">
-    <link rel="stylesheet" href="/static/style.css?=1.0">
-    <!--LOGO-->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/dashboard.css?v=2.1">
     <link rel="shortcut icon" href="/static/multimedia/icono/lapiz-blanco.png" type="image/x-icon">
-    <!--TITLE-->
-    <title>Dashboard</title>
+    <title>ProEdu CRM Dashboard</title>
 </head>
-<body>
-    <header>
-        <nav class="mozilla-headline-nav flex justify-center w-auto h-auto">
-            <ul>
-                <li class=""><a href="/nuevo">Crear Trabajo</a></li>
-                <li class="logo">
-                    <div class="pr-6">
-                        <p>Tu Nombre</p>
-                    </div>
-                    <div class="logos">
-                        <img width="32px" src="/static/multimedia/icono/lapiz-blanco.png" alt="SANTIAGO DUQUE EMPRESA DE EDUCACIÓN PROEDU CMR">
-                    </div>
-                </li>
-            </ul>
-        </nav>    
-    </header>
-    <section class="dm-sans-font">
-        {% extends "base.html" %}
-        {% block content %}
-        <div> <!--Fecha-->
-            <p class="fecha-actual">
-                Resumen financiero — {{ fecha_actual }}
-            </p>
-        </div>
-        <div class="min-h-[20vh] mt-10">
-            <!--Encabezados tabla-->
-            <div class="cards">
-                <div class="card">
-                    <p>Trabajos activos</p>
-                    <h3>{{ total }}</h3>
-                </div>
-                <div class="card danger">
-                    <p>Vencen hoy / mañana</p>
-                    <h3>{{ urgentes }}</h3>
-                </div>
-                <div class="card warning">
-                    <p>Sin adelanto</p>
-                    <h3>{{ sin_adelanto }}</h3>
-                </div>
-                <div class="card">
-                    <p>Saldo pendiente</p>
-                    <h3>${{ saldo_total }}</h3>
-                </div>
-                <div class="card">
-                    <p>Ingresos del mes ({{ fecha_actual }})</p>
-                    <h3>${{ ingreso_mensual }}</h3>
-                </div>
-                <div class="card">
-                    <p>Ingresos del año</p>
-                    <h3>${{ ingreso_anual }}</h3>
-                </div>   
+<body class="proedu-dashboard">
+    <aside class="side-rail" aria-label="Navegacion principal">
+        <a class="rail-item" href="/" aria-label="Inicio">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/></svg>
+        </a>
+        <a class="rail-item active" href="/" aria-label="Dashboard">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>
+        </a>
+        <a class="rail-item" href="/nuevo" aria-label="Editar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 20 4.6-1 10-10a2.3 2.3 0 0 0 0-3.2l-.4-.4a2.3 2.3 0 0 0-3.2 0l-10 10L4 20Z"/><path d="m13.5 6.8 3.7 3.7"/></svg>
+        </a>
+        <a class="rail-item" href="#" aria-label="Portafolio">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M4 12h16"/><path d="M10 12v1.5h4V12"/></svg>
+        </a>
+        <a class="rail-item" href="#" aria-label="Academia">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"/><path d="M6.5 10.2v5.1c1.7 1.8 9.3 1.8 11 0v-5.1"/><path d="M20 9v6"/></svg>
+        </a>
+        <span class="rail-spacer"></span>
+        <a class="rail-item" href="#" aria-label="Configuracion">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.3a3.3 3.3 0 1 0 0-6.6 3.3 3.3 0 0 0 0 6.6Z"/><path d="M19 13.4v-2.8l-2-.5a7.4 7.4 0 0 0-.8-1.8l1.1-1.8-2-2-1.8 1.1a7.4 7.4 0 0 0-1.8-.8L11.2 3H8.8l-.5 1.8a7.4 7.4 0 0 0-1.8.8L4.7 4.5l-2 2 1.1 1.8a7.4 7.4 0 0 0-.8 1.8l-2 .5v2.8l2 .5c.2.6.5 1.2.8 1.8l-1.1 1.8 2 2 1.8-1.1c.6.3 1.2.6 1.8.8l.5 1.8h2.4l.5-1.8c.6-.2 1.2-.5 1.8-.8l1.8 1.1 2-2-1.1-1.8c.3-.6.6-1.2.8-1.8l2-.5Z"/></svg>
+        </a>
+        <a class="rail-item" href="#" aria-label="Informacion">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 10.5V17"/><path d="M12 7h.01"/></svg>
+        </a>
+        <a class="rail-item" href="#" aria-label="Salir">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5H6.5A1.5 1.5 0 0 0 5 6.5v11A1.5 1.5 0 0 0 6.5 19H10"/><path d="M14 8l4 4-4 4"/><path d="M9 12h9"/></svg>
+        </a>
+    </aside>
+
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/" aria-label="ProEdu CRM">ProEdu CRM</a>
+            <div class="topbar-actions">
+                <a class="create-button" href="/nuevo">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 20 4.8-1 10.1-10.1a2.1 2.1 0 0 0 0-3l-.8-.8a2.1 2.1 0 0 0-3 0L5 15.2 4 20Z"/><path d="m13.8 6.4 3.8 3.8"/></svg>
+                    Crear Trabajo
+                </a>
+                <button class="theme-toggle" type="button" aria-label="Cambiar tema">
+                    <span class="sun">☀</span>
+                    <span>Cambiar tema</span>
+                    <span class="moon">☾</span>
+                </button>
             </div>
-            <!--Opciones Tabla-->
-            <div class="table-wrapper mt-5 flex justify-center"> 
-                <table class="dashboard-table">
-                    <div class="tablaone">
+            <button class="profile-button" type="button" aria-label="Perfil">
+                <span class="notify-dot"></span>
+                <span class="avatar">PA</span>
+            </button>
+        </header>
+
+        <main class="content">
+            <section class="summary-header">
+                <p>Resumen financiero — {{ fecha_actual }}</p>
+            </section>
+
+            <section class="metric-grid" aria-label="Metricas financieras">
+                <article class="metric-card">
+                    <div>
+                        <p>Trabajos activos</p>
+                        <strong>{{ total }}</strong>
+                    </div>
+                    <span class="trend up"><svg viewBox="0 0 24 24"><path d="M4 16.5 9 11l4 4 7-8"/><path d="M15 7h5v5"/></svg></span>
+                </article>
+                <article class="metric-card">
+                    <div>
+                        <p>Vencen hoy/mañana</p>
+                        <strong>${{ urgentes }}</strong>
+                    </div>
+                    <span class="trend down"><svg viewBox="0 0 24 24"><path d="M4 7.5 9 13l4-4 7 8"/><path d="M15 17h5v-5"/></svg></span>
+                </article>
+                <article class="metric-card">
+                    <div>
+                        <p>Sin adelanto</p>
+                        <strong>${{ sin_adelanto }}</strong>
+                    </div>
+                    <span class="trend down"><svg viewBox="0 0 24 24"><path d="M4 7.5 9 13l4-4 7 8"/><path d="M15 17h5v-5"/></svg></span>
+                </article>
+                <article class="metric-card focus-card">
+                    <div>
+                        <p>Saldo pendiente</p>
+                        <strong>${{ saldo_total }}</strong>
+                    </div>
+                    <span class="trend up"><svg viewBox="0 0 24 24"><path d="M4 16.5 9 11l4 4 7-8"/><path d="M15 7h5v5"/></svg></span>
+                </article>
+                <article class="metric-card">
+                    <div>
+                        <p>Ingresos del mes ({{ fecha_actual }})</p>
+                        <strong>${{ ingreso_mensual }}</strong>
+                    </div>
+                    <span class="trend up"><svg viewBox="0 0 24 24"><path d="M4 16.5 9 11l4 4 7-8"/><path d="M15 7h5v5"/></svg></span>
+                </article>
+                <article class="metric-card">
+                    <div>
+                        <p>Ingresos del año</p>
+                        <strong>${{ ingreso_anual }}</strong>
+                    </div>
+                    <span class="trend up"><svg viewBox="0 0 24 24"><path d="M4 16.5 9 11l4 4 7-8"/><path d="M15 7h5v5"/></svg></span>
+                </article>
+            </section>
+
+            <section class="table-panel" aria-label="Trabajos recientes">
+                <table class="work-table">
+                    <thead>
                         <tr>
-                            <th>⏱</th>
-                            <th>Entrega</th>
+                            <th>Entrega <span class="sort-icons">↑↓</span></th>
                             <th>Asignatura</th>
                             <th>Estado</th>
                             <th>Pago</th>
-                            <th>$</th>
+                            <th>Acciones</th>
                         </tr>
-                    </div>
-
-                    {% for t in trabajos %}
-                    <div class="tabletwo">
-                        <tr class="
-                            {% if t.dias <= 1 %}hoy
-                            {% elif t.dias <= 3 %}proximo
-                            {% endif %}
-                        ">
-                            <!--Días-->
-                            <td class="dias">
-                                <span class="flex justify-center items-center">
-                                    {{ t.dias }}
-                                </span>
-                            </td>
-                            <!--Fecha-->
-                            <td>
-                                <span class="flex justify-center">
-                                    {{ t.fecha_entrega_parcial if t.tiene_entrega_parcial else t.fecha_entrega_final }}
-                                </span>
-                            </td>
-                            <!--Asignatura-->
-                            <td>
-                                <strong>{{ t.asignatura }}</strong>
-                                {% if t.observaciones %}
-                                    <div class="obs">{{ t.observaciones }}</div>
-                                {% endif %}
-                            </td>
-                            <td class="flex justify-center mt-2.5">
-                                <span class="estado {{ t.estado_trabajo }}">
-                                    {{ t.estado_trabajo }}
-                                </span>
-                            </td>
-                            <td>
-                                <span class="flex justify-center mt-2.5">
-                                    <div class="pago {{ t.estado_pago|lower|replace(' ', '-') }}">
-                                        {{ t.estado_pago }}
+                    </thead>
+                    <tbody>
+                        {% if trabajos %}
+                            {% for t in trabajos %}
+                            <tr>
+                                <td>{{ t.fecha_entrega_parcial if t.tiene_entrega_parcial else t.fecha_entrega_final }}</td>
+                                <td>
+                                    <strong>{{ t.asignatura }}</strong>
+                                    {% if t.observaciones %}<span>{{ t.observaciones }}</span>{% endif %}
+                                </td>
+                                <td><span class="status-pill status-blue">{{ t.estado_trabajo }}</span></td>
+                                <td>${{ t.saldo }}</td>
+                                <td>
+                                    <div class="action-row">
+                                        <a href="#">Ver</a>
+                                        <a href="/nuevo">Editar</a>
+                                        <a href="#">Mensaje</a>
                                     </div>
-                                </span>
-                            </td>
-                            <td class="saldo">
-                                <span class="flex justify-center">
-                                    ${{ t.saldo }}
-                                </span>
-                            </td>
-                            <td>
-                                <span class="flex justify-center">
-                                    <a class="btn" href="/entregar/{{ t.id }}">✔</a>
-                                </span>
-                            </td>
-                        </tr>
-                    </div>
-                    {% endfor %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>15 Jun 2026</td>
+                                <td><strong>Cálculo Avanzado</strong><span>Entrega parcial con revisión de integrales.</span></td>
+                                <td><span class="status-pill status-green">Pagaré</span></td>
+                                <td>$0</td>
+                                <td>
+                                    <div class="action-row">
+                                        <a href="#">Ver</a>
+                                        <a href="#">Editar</a>
+                                        <a href="#">Mensaje</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="tooltip-row">
+                                <td>18 Jun 2026</td>
+                                <td><strong>Inglés Comercial</strong><span>Presentación ejecutiva y vocabulario técnico.</span><span class="row-tooltip">Todo tooltip</span></td>
+                                <td><span class="status-pill status-blue">En curso</span></td>
+                                <td>$0</td>
+                                <td>
+                                    <div class="action-row">
+                                        <a href="#">Ver</a>
+                                        <a href="#">Editar</a>
+                                        <a href="#">Mensaje</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>21 Jun 2026</td>
+                                <td><strong>Marketing Digital</strong><span>Auditoría de campaña y tablero de métricas.</span></td>
+                                <td><span class="status-pill status-red">Vencido</span></td>
+                                <td>$0</td>
+                                <td>
+                                    <div class="action-row">
+                                        <a href="#">Ver</a>
+                                        <a href="#">Editar</a>
+                                        <a href="#">Mensaje</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>24 Jun 2026</td>
+                                <td><strong>Estadística Aplicada</strong><span>Modelo predictivo con interpretación final.</span></td>
+                                <td><span class="status-pill status-blue">En curso</span></td>
+                                <td>$0</td>
+                                <td>
+                                    <div class="action-row">
+                                        <a href="#">Ver</a>
+                                        <a href="#">Editar</a>
+                                        <a href="#">Mensaje</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
                 </table>
-            </div>
-        </div>
-    </section>
-    <footer class="flex justify-around">
-        <div>
-            <img class="" width="120px" src="/static/multimedia/better/Diseño_sin_título-removebg-preview.png" alt="PROEDU LOGO EMPRESA COLOR BLANCO EDUCATIVO BAJO LICENCIA"></li>
-        </div>
-        <ul class="">
-            <li><a href="">Consultar Programador</a></li>
-            <li>Diseñado por COLdex</li>
-            <li>Copyright 2036 DERECHOS RESERVADOS</li>
-        </ul>
-    </footer>
-        {% endblock %}
+            </section>
+        </main>
+
+        <footer class="footer-brand">
+            <svg class="footer-logo" viewBox="0 0 120 86" aria-hidden="true">
+                <path d="M17 31h86L60 8 17 31Z"/>
+                <path d="M25 36h70"/>
+                <path d="M31 42v24M46 42v24M61 42v24M76 42v24M91 42v24"/>
+                <path d="M22 70h76M18 78h84"/>
+                <path d="M54 61 78 37l8 8-24 24-11 3 3-11Z"/>
+            </svg>
+            <p>Copyright 2026 ProEdu CRM | Todos los derechos reservados | Diseñado por COLdex | Versión 2.1</p>
+        </footer>
+    </div>
 </body>
 </html>
