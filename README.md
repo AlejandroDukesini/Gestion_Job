@@ -1,4 +1,4 @@
-﻿# CRM DUKE 1.0.0v
+﻿# PROEDU CRM 1.0.0v
 
 Actualizado el 15/05/2026
 
