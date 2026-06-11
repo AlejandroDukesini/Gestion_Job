@@ -1,4 +1,4 @@
-[Imagen al desplegar el sitio web](/static/site-web.png)
+[Imagen al desplegar el sitio web](/static/multimedia/site-web.png)
 
 # PROEDU CRM 2.0.1v
 
