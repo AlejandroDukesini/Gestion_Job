@@ -1,8 +1,9 @@
-﻿![Imagen al desplegar el sitio web](/static/site-web.png)
+[Imagen al desplegar el sitio web](/static/site-web.png)
 
 # PROEDU CRM 2.0.1v
 
-Actualizado el 15/05/2026
+Licencia el 15/05/2026
+Última Actualización 08/06/2026 2.0v
 
 Sitio Web desplegada a nivel local para la gestión de los trabajos a entregar, con sus estados de pendientes, entregados, si están pagados o hay adelantos. Utilizado para las personas que realizan trabajos de otros (freelancer/independiente) y quiere mantener una auditoría de como va su trabajo.
 
