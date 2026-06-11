@@ -1,4 +1,6 @@
-﻿# PROEDU CRM 1.0.0v
+﻿![Imagen al desplegar el sitio web](/static/site-web.png)
+
+# PROEDU CRM 2.0.1v
 
 Actualizado el 15/05/2026
 
@@ -35,13 +37,13 @@ CSS 3<br>
 
 # 2. Activar el servidor de python
 
-python app.py
+'python app.py'
 
 Te saldrá el ip del sitio web sin necesidad de activar también el front, ejemplo: 127.000.000.1
 
 # 3. Instalar las dependencias
 
-pip install -r requirements.txt
+'pip install -r requirements.txt'
 
 # 2. Tecnologías Utilizadas
 
